@@ -80,16 +80,25 @@ SpendSync/
 │   └── register.html       # Register page
 │
 └── README.md
-⚙️ Setup & Installation
+
+## ⚙️ Prerequisites
+- Python 3.8 or above → Download: https://python.org
+
+## ⚙️ Setup & Installation
+
 1. Clone the repository
-git clone https://github.com/yashika-yadavvv/AI-Based-Finance-Tracker.git
-cd AI-Based-Finance-Tracker
-2. Install dependencies
-pip install flask flask-sqlalchemy werkzeug
+   git clone https://github.com/yashika-yadavvv/AI-Based-Finance-Tracker.git
+   cd AI-Based-Finance-Tracker
+
+2. Install all dependencies
+   pip install -r requirements.txt
+
 3. Run the application
-python app.py
+   python app.py
+
 4. Open in browser
-http://127.0.0.1:5000
+   http://127.0.0.1:5000
+   
 📸 Screenshots
 Dashboard Overview
 ![Dashboard](screenshots/dashboard.png)
