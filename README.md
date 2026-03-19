@@ -92,16 +92,17 @@ python app.py
 http://127.0.0.1:5000
 📸 Screenshots
 Dashboard Overview
-�
-Load image
+![Dashboard](screenshots/dashboard.png)
+
 AI Floater with Smart Insights
-�
-Load image
+![AI Floater](screenshots/ai.png)
+
 Analytics Page
-�
-Load image
+![Analytics](screenshots/analytics.png)
+
 Profile Page
-�
+![Profile](screenshots/profile.pbg)
+
 🔑 Key Highlights
 ✅ Multi-user support — each user has isolated data
 ✅ Secure authentication — hashed passwords
