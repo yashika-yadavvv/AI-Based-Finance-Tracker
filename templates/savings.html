@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SpendSync - Savings</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="container">
+
+ <!-- SIDEBAR -->
+    <div class="sidebar">
+        <h2>SpendSync</h2>
+        <a href="/" class="{% if active == 'dashboard' %}active{% endif %}">🏠 Dashboard</a>
+        <a href="/income" class="{% if active == 'income' %}active{% endif %}">💰 Income</a>
+        <a href="/expense" class="{% if active == 'expense' %}active{% endif %}">💸 Expenses</a>
+        <a href="/analytics" class="{% if active == 'analytics' %}active{% endif %}">📊 Analytics</a>
+        <a href="/savings" class="{% if active == 'savings' %}active{% endif %}">🎯 Savings</a>
+        <a href="/ai" class="{% if active == 'ai' %}active{% endif %}">🤖 AI</a>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content savings-page">
+        <h2>Savings Intelligence</h2>
+
+        <!-- TIME FILTER -->
+        <select id="timeFilter">
+            <option value="all">All Time</option>
+            <option value="month">This Month</option>
+            <option value="3months">Last 3 Months</option>
+            <option value="year">This Year</option>
+        </select>
+
+        <!-- OVERVIEW CARDS -->
+        <div class="summary-grid">
+            <div class="card">
+                <h4>Total Savings</h4>
+                <p id="totalSavings">₹ 0</p>
+            </div>
+
+            <div class="card">
+                <h4>Savings Rate</h4>
+                <p id="savingsRate">0%</p>
+            </div>
+
+            <div class="card">
+                <h4>Avg Monthly Savings</h4>
+                <p id="avgSavings">₹ 0</p>
+            </div>
+
+            <div class="card">
+                <h4>Stability Score</h4>
+                <p id="stabilityScore">0 / 100</p>
+            </div>
+        </div>
+
+        <!-- GOAL SECTION -->
+        <div class="card">
+            <h4>Create Savings Goal</h4>
+            <input type="text" id="goalName" placeholder="Goal Name">
+            <input type="number" id="goalAmount" placeholder="Target Amount">
+            <button onclick="addGoal()">Add Goal</button>
+
+            <div id="goalList"></div>
+        </div>
+
+        <!-- PROJECTION CHART -->
+        <div class="chart-box">
+            <h4>Savings Projection (Next 6 Months)</h4>
+            <canvas id="projectionChart"></canvas>
+        </div>
+
+        <!-- AI INSIGHTS -->
+        <div class="card">
+            <h4>AI Recommendations</h4>
+            <ul id="aiSuggestions"></ul>
+        </div>
+
+    </div>
+</div>
+
+<!-- DELETE CONFIRM MODAL -->
+<div id="confirmModal" class="modal">
+    <div class="modal-content">
+        <h3 id="modalTitle">Confirm Action</h3>
+        <p id="modalMessage">Are you sure?</p>
+        <div class="modal-buttons">
+            <button onclick="closeModal()" class="action-btn">Cancel</button>
+            <button onclick="confirmAction()" class="delete-btn action-btn">Confirm</button>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='savings.js') }}"></script>
+</body>
+</html>

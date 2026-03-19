@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SpendSync - Expenses</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="sidebar">
+        <h2>SpendSync</h2>
+        <a href="/" class="{% if active == 'dashboard' %}active{% endif %}">🏠 Dashboard</a>
+        <a href="/income" class="{% if active == 'income' %}active{% endif %}">💰 Income</a>
+        <a href="/expense" class="{% if active == 'expense' %}active{% endif %}">💸 Expenses</a>
+        <a href="/analytics" class="{% if active == 'analytics' %}active{% endif %}">📊 Analytics</a>
+        <a href="/savings" class="{% if active == 'savings' %}active{% endif %}">🎯 Savings</a>
+        <a href="/ai" class="{% if active == 'ai' %}active{% endif %}">🤖 AI</a>
+    </div>
+    </div>
+
+    <div class="content">
+
+        <div class="topbar">
+            <h2>Add Expense</h2>
+        </div>
+
+        <!-- FORM -->
+        <div class="form-box">
+
+            <select id="expenseCategory">
+                <option value="">Select Category</option>
+                <option value="food">Food</option>
+                <option value="transport">Transport</option>
+                <option value="rent">Rent</option>
+                <option value="bills">Bills</option>
+                <option value="shopping">Shopping</option>
+                <option value="healthcare">Healthcare</option>
+                <option value="education">Education</option>
+                <option value="other">Other</option>
+            </select>
+
+            <input type="text" id="customCategory"
+                   placeholder="Enter custom category"
+                   style="display:none;">
+
+            <input type="number" id="expenseAmount" placeholder="Amount">
+            <input type="date" id="expenseDate">
+
+            <button type="button" onclick="addExpense()">Add Expense</button>
+
+        </div>
+
+        <!-- SEARCH SORT AND DATE RANGE FILTER-->
+         <div class="filter-box">
+            <input type="text"id="Expensesearch" class="input-style" placeholder="Search by source">
+
+            <select id="Expensesort" class="select-style">
+                <option value="amountHigh">Amount High -> Low</option>
+                <option value="amountLow">Amount Low -> High</option>
+                <option value="latest">Latest First</option>
+                <option value="oldest">Oldest First</option>
+            </select>
+
+            <input type="date" id="ExpensefromDate" class="input-style">
+            <input type="date" id="ExpensetoDate" class="input-style">
+         </div>
+
+        <!-- TOTAL CARD -->
+        <div class="card">
+            <h3>Total Expenses</h3>
+            <p id="totalExpense">0</p>
+        </div>
+
+        <!-- TABLE -->
+        <div class="table-box">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Delete</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody id="expenseList"></tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<div id="confirmModal" class="modal">
+    <div class="modal-content">
+        <h3 id="modalTitle">Confirm Action</h3>
+        <p id="modalMessage">Are you sure?</p>
+        <div class="modal-buttons">
+            <button onclick="closeModal()" class="action-btn">Cancel</button>
+            <button onclick="confirmAction()" class="delete-btn action-btn">Confirm</button>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='expense.js') }}"></script>
+
+</body>
+</html>

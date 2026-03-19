@@ -1,0 +1,138 @@
+{% extends "dashboard.html" %}
+{% block content %}
+
+<div class="profile-wrapper">
+
+    <!-- HEADER -->
+    <div class="profile-header">
+
+        <h2 id="greeting">Hello 👋</h2>
+
+        <div class="profile-user">
+
+            <div class="profile-circle" onclick="togglePhotoOptions()">
+                <img id="profileImage" src="/static/images/default.png" class="profile-avatar">
+            </div>
+
+            <div id="photoOptions" class="photo-options">
+                <input type="file" id="uploadPhoto" hidden>
+                <button onclick="document.getElementById('uploadPhoto').click()">Upload Photo</button>
+                <button onclick="uploadPhoto()">Update Photo</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- MAIN LAYOUT -->
+    <div class="profile-layout">
+
+        <!-- TOP SECTION (Profile + Goals) -->
+        <div class="top-section">
+
+            <!-- PROFILE CARD -->
+            <div class="profile-card">
+
+                <h3>Personal Info</h3>
+
+                <input id="userName" placeholder="Name" autocomplete="name">
+                <input id="userAge" placeholder="Age" autocomplete="off">
+
+                <select id="userGender">
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                </select>
+
+                <input id="userEmail" placeholder="Email" autocomplete="email">
+                <input type="password" id="newPassword" placeholder="New Password" autocomplete="new-password">
+
+                <button onclick="openProfileConfirm()">Update Profile</button>
+                <button onclick="openLogoutConfirm()" class="logout-btn">Logout</button>
+
+            </div>
+
+            <!-- GOALS -->
+            <div class="goal-section">
+
+                <h3>Goals</h3>
+                <div id="goalCards"></div>
+
+            </div>
+
+        </div>
+
+        <!-- ACTIVITY FULL WIDTH -->
+        <div class="activity-section">
+
+            <h3>Activity</h3>
+
+            <div id="financeChartBox">
+                <canvas id="incomeExpenseChart"></canvas>
+                <canvas id="savingsChart"></canvas>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- STREAK -->
+    <div class="streak-section">
+
+        <h3>Saving Streak</h3>
+        <div id="streakCalendar"></div>
+
+    </div>
+
+    <!-- TABLE -->
+    <div class="finance-table">
+
+        <h3>Finance History</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Income</th>
+                    <th>Expense</th>
+                </tr>
+            </thead>
+
+            <tbody id="financeTable"></tbody>
+        </table>
+
+    </div>
+
+    <!--AI SUMMARY CARD-->
+    <div class="ai-summary-card">
+    <div class="ai-summary-icon">🤖</div>
+    <div class="ai-summary-text">
+        <h4>AI Financial Summary</h4>
+        <p id="aiProfileSummary">Analyzing your finances...</p>
+    </div>
+</div>
+
+</div>
+
+<!-- CONFIRM MODAL -->
+
+<div id="confirmModal" class="modal">
+
+  <div class="modal-content">
+
+    <h3 id="modalTitle">Confirm Action</h3>
+    <p id="modalMessage">Are you sure?</p>
+
+    <div class="modal-buttons">
+      <button onclick="closeModal()" class="action-btn">Cancel</button>
+      <button onclick="confirmAction()" class="delete-btn action-btn">Confirm</button>
+    </div>
+
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/static/profile.js"></script>
+
+{% endblock %}

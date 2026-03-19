@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SpendSync - Analytics</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <h2>SpendSync</h2>
+        <a href="/" class="{% if active == 'dashboard' %}active{% endif %}">🏠 Dashboard</a>
+        <a href="/income" class="{% if active == 'income' %}active{% endif %}">💰 Income</a>
+        <a href="/expense" class="{% if active == 'expense' %}active{% endif %}">💸 Expenses</a>
+        <a href="/analytics" class="{% if active == 'analytics' %}active{% endif %}">📊 Analytics</a>
+        <a href="/savings" class="{% if active == 'savings' %}active{% endif %}">🎯 Savings</a>
+        <a href="/ai" class="{% if active == 'ai' %}active{% endif %}">🤖 AI</a>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="content analytics-page">
+
+        <h2>Financial Analytics</h2>
+
+        <!-- FILTER -->
+        <div class="filter-bar">
+            <select id="timeFilter">
+                <option value="month">This Month</option>
+                <option value="3months">Last 3 Months</option>
+                <option value="year">This Year</option>
+                <option value="all">All Time</option>
+            </select>
+        </div>
+
+        <!-- SUMMARY CARDS -->
+        <div class="summary-grid">
+            <div class="card">
+                <h4>Total Income</h4>
+                <p id="totalIncome">₹ 0</p>
+            </div>
+
+            <div class="card">
+                <h4>Total Expense</h4>
+                <p id="totalExpense">₹ 0</p>
+            </div>
+
+            <div class="card">
+                <h4>Net Savings</h4>
+                <p id="netSavings">₹ 0</p>
+            </div>
+        </div>
+
+
+        <!-- ROW 2 -->
+        <div class="two-grid">
+
+            <div class="chart-box">
+                <h4>Monthly Income vs Expenses</h4>
+                <canvas id="monthlyChart"></canvas>
+            </div>
+
+            <div class="chart-box">
+                <h4>Expense Distribution</h4>
+                <canvas id="categoryChart"></canvas>
+            </div>
+
+        </div>
+
+
+        <!-- ROW 3 -->
+        <div class="two-grid">
+
+            <div class="chart-box">
+                <h4>Income Sources</h4>
+                <canvas id="incomeSourceChart"></canvas>
+            </div>
+
+            <div class="chart-box">
+                <h4>Net Savings Trend</h4>
+                <canvas id="savingsTrendChart"></canvas>
+            </div>
+
+        </div>
+
+
+        <!-- AI INSIGHTS -->
+        <div class="card">
+            <h4>AI Insights</h4>
+            <ul id="aiInsights"></ul>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='analytics.js') }}"></script>
+
+</body>
+</html>

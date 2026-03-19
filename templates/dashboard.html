@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SpendSync Dashboard</title>
+
+    <!-- CSS LINK -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+</head>
+<body class="{{active}}-page">
+
+<div class="container">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <h2>SpendSync</h2>
+        <a href="/" class="{% if active == 'dashboard' %}active{% endif %}">🏠 Dashboard</a>
+        <a href="/income" class="{% if active == 'income' %}active{% endif %}">💰 Income</a>
+        <a href="/expense" class="{% if active == 'expense' %}active{% endif %}">💸 Expenses</a>
+        <a href="/analytics" class="{% if active == 'analytics' %}active{% endif %}">📊 Analytics</a>
+        <a href="/savings" class="{% if active == 'savings' %}active{% endif %}">🎯 Savings</a>
+        <a href="/ai" class="{% if active == 'ai' %}active{% endif %}">🤖 AI</a>
+    </div>
+    <!-- CONTENT -->
+    <div class="content">
+        {% block content %}
+
+        <div class="topbar">
+            <h2>Dashboard Overview</h2>
+
+            <div class="filter-box">
+                <select id="timeFilter" class="filter-dropDown">
+                    <option value="all">All Time</option>
+                    <option value="month">This Month</option>
+                    <option value="week">This Week</option>
+                    <option value="today">Today</option>
+                </select>
+            </div>
+            <a href="{{ url_for('profile') }}" class="profile user-badge">
+               <img src="{{ url_for('static', filename='uploads/' + user.profile_image) if user.profile_image else url_for('static', filename='images/default.png') }}" class="avatar">
+                 {{ user.name }}
+            </a>
+        </div>
+
+        <!-- CARDS -->
+        <div class="cards">
+
+            <div class="card">
+                <h3>Total Balance</h3>
+                <p class="counter total-balance" data-target="0">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Monthly Income</h3>
+                <p class="counter total-income" data-target="0">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Expenses</h3>
+                <p class="counter total-expense" data-target="0">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Savings</h3>
+                <p class="counter total-savings" data-target="0">0</p>
+            </div>
+
+
+        </div>
+
+        <!-- CHARTS -->
+        <div class="charts-row">
+
+            <div class="chart-box">
+            <h4>Expense Distribution</h4>
+            <canvas id="expenseDonut"></canvas>
+            </div>
+
+            <div class="chart-box">
+                <h4>Savings Rate</h4>
+                <canvas id="savingsDonut"></canvas>
+            </div>
+
+            <div class="chart-box">
+                <h4>Monthly Overview</h4>
+                <canvas id="miniLineChart"></canvas>
+            </div>
+
+            <div class="chart-box large">
+                <h4>Category Comparison</h4>
+                <canvas id="categoryBarChart"></canvas>
+            </div>
+
+            <div class="chart-box large">
+                <h4>Weekly Expense Trend</h4>
+                <canvas id="weeklyTrendChart"></canvas>
+            </div>
+        </div>
+
+
+
+        <!--SAVINGS RATE-->
+        <div class="savings-strip">
+            Saving Rate:
+            <span id="savingsRate"></span>
+        </div>
+
+        <!-- ================= SMART AI FLOATER ================= -->
+
+        <!-- Badge with alert count -->
+        <div class="ai-float" id="aiFloat" onclick="toggleAIPanel()">
+             <img src="{{ url_for('static', filename='images/ai-floater.png') }}" alt="AI">
+             <span class="ai-badge" id="aiBadge">0</span>
+        </div>
+
+        <!-- Main AI Panel -->
+        <div class="ai-panel-smart" id="aiPanelSmart">
+
+        <!-- Header -->
+        <div class="ai-panel-header">
+             <span>🤖 SpendSync AI</span>
+             <button onclick="toggleAIPanel()" class="ai-close-btn">✕</button>
+        </div>
+
+        <!-- Mood Indicator -->
+        <div class="ai-mood-bar" id="aiMoodBar">
+             <span id="aiMoodEmoji">😎</span>
+             <span id="aiMoodText">Analyzing...</span>
+        </div>
+
+        <!-- Tabs -->
+        <div class="ai-tabs">
+             <button class="ai-tab active" onclick="switchTab('insights')">Insights</button>
+             <button class="ai-tab" onclick="switchTab('predict')">Predict</button>
+             <button class="ai-tab" onclick="switchTab('chat')">Chat</button>
+        </div>
+
+        <!-- Tab: Insights -->
+        <div class="ai-tab-content" id="tab-insights">
+             <div id="aiInsightsList"></div>
+        </div>
+
+        <!-- Tab: Predict -->
+        <div class="ai-tab-content" id="tab-predict" style="display:none">
+             <div id="aiPredictContent"></div>
+        </div>
+
+        <!-- Tab: Chat -->
+        <div class="ai-tab-content" id="tab-chat" style="display:none">
+             <div id="aiFloatChatWindow" class="ai-float-chat-window"></div>
+             <div class="ai-float-input-row">
+                  <input id="aiFloatInput" placeholder="Ask me anything..." 
+                   onkeydown="if(event.key==='Enter') sendFloatChat()">
+             <button onclick="sendFloatChat()">➤</button>
+        </div>
+    </div>
+
+</div>
+
+    </div>
+
+</div>
+{% endblock %}
+
+<!-- IMPORTANT: Chart.js FIRST -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Your Script -->
+<script src="{{ url_for('static', filename='Dashboard.js') }}"></script>
+
+</body>
+</html>

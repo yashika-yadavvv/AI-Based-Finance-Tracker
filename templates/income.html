@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SpendSync - Income</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <h2>SpendSync</h2>
+        <a href="/" class="{% if active == 'dashboard' %}active{% endif %}">🏠 Dashboard</a>
+        <a href="/income" class="{% if active == 'income' %}active{% endif %}">💰 Income</a>
+        <a href="/expense" class="{% if active == 'expense' %}active{% endif %}">💸 Expenses</a>
+        <a href="/analytics" class="{% if active == 'analytics' %}active{% endif %}">📊 Analytics</a>
+        <a href="/savings" class="{% if active == 'savings' %}active{% endif %}">🎯 Savings</a>
+        <a href="/ai" class="{% if active == 'ai' %}active{% endif %}">🤖 AI</a>
+    </div>
+        
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <h1>Add Income</h1>
+
+        <!-- FORM -->
+        <div class="form-box">
+            <input type="text" id="source" placeholder="Income Source">
+            <input type="number" id="amount" placeholder="Amount">
+            <input type="date" id="date">
+            <button onclick="addIncome()">Add Income</button>
+        </div>
+
+        <!-- FILTERS -->
+        <div class="filter-box">
+            <input type="text" id="incomeSearch" class="input-style" placeholder="Search by source">
+
+            <select id="incomeSort" class="select-style">
+                <option value="amountHigh">Amount High -> Low</option>
+                <option value="amountLow">Amount Low -> High</option>
+                <option value="latest">Latest First</option>
+                <option value="oldest">Oldest First</option>
+            </select>
+
+            <input type="date" id="incomeFromDate" class="input-style">
+            <input type="date" id="incomeToDate" class="input-style">
+        </div>
+
+        <!-- TOTAL -->
+        <div class="card">
+            <h3>Total Income</h3>
+            <p id="totalIncome">₹ 0</p>
+        </div>
+
+        <!-- TABLE -->
+        <div class="table-box">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Source</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Delete</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody id="incomeList"></tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- CONFIRM MODAL -->
+<div id="confirmModal" class="modal">
+    <div class="modal-content">
+        <h3 id="modalTitle">Confirm Action</h3>
+        <p id="modalMessage">Are you sure?</p>
+        <div class="modal-buttons">
+            <button onclick="closeModal()" class="action-btn">Cancel</button>
+            <button onclick="confirmAction()" class="delete-btn action-btn">Confirm</button>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='income.js') }}"></script>
+
+</body>
+</html>

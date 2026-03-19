@@ -1,0 +1,86 @@
+{% extends "dashboard.html" %}
+{% block content %}
+
+<div class="ai-container">
+
+    <h1 style="margin-bottom:30px; font-size:32px;">
+        AI Financial Intelligence Center
+    </h1>
+
+    <!-- ===== HEALTH SCORE ===== -->
+    <div class="health-section">
+        <div class="score-circle" id="scoreCircle">
+            <span id="healthScore">0</span>
+        </div>
+
+        <div class="score-info">
+            <h2 id="healthStatus">Analyzing...</h2>
+            <p>Your Financial Health Score</p>
+        </div>
+    </div>
+
+    <!-- ===== INSIGHT CARDS ===== -->
+    <div class="insight-cards">
+
+        <div class="insight-card">
+            <h4>Spending Pattern</h4>
+            <p id="spendingInsight">Analyzing...</p>
+        </div>
+
+        <div class="insight-card">
+            <h4>Savings Rate</h4>
+            <p id="savingsInsight">Analyzing...</p>
+        </div>
+
+        <div class="insight-card">
+            <h4>Risk Level</h4>
+            <p id="riskInsight">Analyzing...</p>
+        </div>
+
+    </div>
+
+    <!-- ===== RECOMMENDATION ENGINE ===== -->
+    <div class="insight-card" style="margin-bottom:30px;">
+        <h4>AI Recommendation</h4>
+        <p id="aiRecommendation">Generating insights...</p>
+    </div>
+
+    <!-- ===== WHAT IF SIMULATOR ===== -->
+    <div class="insight-card" style="margin-bottom:30px;">
+        <h4>What-If Simulator</h4>
+
+        <div style="display:flex; gap:10px; margin-top:10px;">
+            <input type="number" id="simInput" placeholder="Increase savings by %"
+                   style="padding:8px; border-radius:8px; border:none;">
+            <button onclick="runSimulation()" class="action-btn edit-btn">
+                Simulate
+            </button>
+        </div>
+
+        <p id="simulationResult" style="margin-top:10px; color: #c084fc;"></p>
+    </div>
+
+    <!-- ===== CHAT SECTION ===== -->
+    <div class="chat-section">
+
+        <div id="chatWindow" class="chat-window"></div>
+
+        <div class="quick-actions">
+            <button onclick="quickAsk('How can I save more?')">Save More</button>
+            <button onclick="quickAsk('Where am I overspending?')">Overspending</button>
+            <button onclick="quickAsk('Investment advice')">Invest</button>
+        </div>
+
+        <div class="chat-input-area">
+            <input type="text" id="user-input"
+                   placeholder="Ask your AI financial assistant..." />
+            <button id="send-btn" onclick="sendMessage()">Send</button>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='ai.js') }}"></script>
+
+{% endblock %}
