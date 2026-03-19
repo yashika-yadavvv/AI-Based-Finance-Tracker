@@ -101,7 +101,7 @@ Analytics Page
 ![Analytics](screenshots/analytics.png)
 
 Profile Page
-![Profile](screenshots/profile.pbg)
+![Profile](screenshots/profile.png)
 
 🔑 Key Highlights
 ✅ Multi-user support — each user has isolated data
